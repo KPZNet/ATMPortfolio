@@ -1,0 +1,36 @@
+
+{% extends "layout.html" %}
+
+{% block content %}
+
+      <h4 class="title">Damage Claim Reports</h4>
+          <h3> All Damage Claims </h3>
+
+    <table style="margin: 3px">
+    <tr style="background-color: #7cc3a97d">
+        <th style="color: white;padding: 1rem">ID</th>
+        <th style="color: white;padding: 1rem">Pothole ID</th>
+        <th style="color: white;padding: 1rem">Name</th>
+        <th style="color: white;padding: 1rem">Address</th>
+        <th style="color: white;padding: 1rem">Phone</th>
+        <th style="color: white;padding: 1rem">Damage</th>
+        <th style="color: white;padding: 1rem">Amount</th>
+        <th style="color: white;padding: 1rem">Approved</th>
+    </tr>
+    {% for ID in dcReport -%}
+        <tr style="background-color: aliceblue">
+        <td style="padding: 1rem">{{dcReport[ID].ID}}</td>
+        <td style="padding: 1rem">{{dcReport[ID].potHoleID}}</td>
+        <td style="padding: 1rem">{{dcReport[ID].name}}</td>
+        <td style="padding: 1rem">{{dcReport[ID].address}}</td>
+        <td style="padding: 1rem">{{dcReport[ID].phone}}</td>
+        <td style="padding: 1rem">{{dcReport[ID].damageType}}</td>
+        <td style="padding: 1rem">{{dcReport[ID].dollarAmount}}</td>
+        <td style="padding: 1rem">{{dcReport[ID].approved}}</td>
+    </tr>
+
+    {% endfor %}
+    </table>
+
+
+{% endblock %}
