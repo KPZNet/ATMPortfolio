@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} - Public Works Department Repair System</title>
+    <title>{{ title }} - Automated Teller Machine</title>
     <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/static/content/site.css" />
     <script src="/static/scripts/modernizr-2.6.2.js"></script>
@@ -18,16 +18,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/" class="navbar-brand">PHTRS Home</a>
+                <a href="/" class="navbar-brand">ATM Home</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('AEPotHole') }}">Add PotHole</a></li>
-                    <li><a href="{{ url_for('AEWorkOrder') }}">Add Work Order</a></li>
-                    <li><a href="{{ url_for('AEDamageClaim') }}">Add Damage Claim</a></li>
-                    <li><a href="{{ url_for('AllPotHolesReport') }}">Show All PotHoles Report</a></li>
-                    <li><a href="{{ url_for('AllWorkOrdersReport') }}">Show All Work Orders Report</a></li>
-                    <li><a href="{{ url_for('AllDamageClaimsReport') }}">Show All Damage Claims Report</a></li>
+                    <li><a href="{{ url_for('Withdrawal') }}">Withdrawal</a></li>
                     <li><a href="{{ url_for('about') }}">About</a></li>
                 </ul>
             </div>
@@ -38,7 +33,7 @@
         {% block content %}{% endblock %}
         <hr />
         <footer>
-            <p>&copy; {{ year }} - CSU Global 505 Computer Science Foundations</p>
+            <p>&copy; {{ year }} - CSU Global 505 Computer Science Foundations Portfolio</p>
         </footer>
     </div>
 

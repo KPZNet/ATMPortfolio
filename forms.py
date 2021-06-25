@@ -3,11 +3,8 @@ from wtforms import StringField, SubmitField, TextAreaField, IntegerField, Boole
 from wtforms.validators import DataRequired, Email
 
 
-class AEPotHoleForm ( FlaskForm ) :
-    streetAddress = StringField ( "Street:", validators=[DataRequired ()] )
-    location = StringField ( "Pothole Location:", validators=[DataRequired ()] )
-    size = IntegerField ( "Size 1-10:", validators=[DataRequired ()] )
-    severity = StringField ( "Severity:", validators=[DataRequired ()] )
+class WithdrawalForm ( FlaskForm ) :
+    amount = StringField ( "Amount to Withdraw:", validators=[DataRequired ()] )
     submit = SubmitField ( "Submit" )
 
 class AEWorkOrderForm ( FlaskForm ) :

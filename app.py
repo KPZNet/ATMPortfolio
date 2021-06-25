@@ -1,8 +1,8 @@
 from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for
 
-from forms import AEPotHoleForm, AEWorkOrderForm, AEDamageClaimForm
-from PotHoleModels import DataStore, PotHole, WorkOrder, DamageClaim
+from forms import WithdrawalForm
+from PotHoleModels import DataStore, Transaction, WorkOrder, DamageClaim
 
 import jsonpickle
 import os.path
@@ -37,25 +37,17 @@ def about():
     )
 
 
-@app.route('/AEPotHole/', methods=['get', 'post'])
-def AEPotHole():
-    form = AEPotHoleForm()
+@app.route('/Withdrawal/', methods=['get', 'post'])
+def Withdrawal():
+    form = WithdrawalForm()
     if form.validate_on_submit():
         f = form
-        ph = PotHole()
-        ph.streetAddress = f.streetAddress.data
-        ph.size = f.size.data
-        ph.location = f.location.data
-        ph.severity = f.severity.data
+        ph = Transaction()
+        ph.amount = f.amount.data
 
-        ph.CalculatePriority()
-        ph.CaculateDistrict()
-        ds.AddPotHole(ph)
-        DataStore.FactoryDataSave(ds)
+        return redirect(url_for('Withdrawal'))
 
-        return redirect(url_for('AEPotHole'))
-
-    return render_template('AEPotHole.html', form=form)
+    return render_template('Withdrawal.html', form=form)
 
 @app.route('/AEWorkOrder/', methods=['get', 'post'])
 def AEWorkOrder():

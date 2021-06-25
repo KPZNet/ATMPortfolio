@@ -3,34 +3,12 @@ import json
 import os.path
 import jsonpickle
 
-class PotHole (  ) :
+class Transaction (  ) :
 
     def __init__(self):
         self.ID = 0
-        self.streetAddress = "NONE"
-        self.district = "NONE"
-        self.location = "NONE"
-        self.severity = "NONE"
-        self.size = 0
-        self.priority = "NONE"
+        self.amount
 
-    def CalculatePriority(self):
-        self.priority = "LOW"
-        if self.size > 3:
-            self.priority = "MEDIUM"
-        if self.size > 8:
-            self.priority = "HIGH"
-
-    def CaculateDistrict(self):
-        self.district = "District-13"
-        if "East" in self.streetAddress:
-            self.district = "East District"
-        if "West" in self.streetAddress:
-            self.district = "West District"
-        if "South" in self.streetAddress:
-            self.district = "South District"
-        if "North" in self.streetAddress:
-            self.district = "North District"
 
 class WorkOrder (  ) :
     hourRate = 20.00
