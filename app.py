@@ -2,7 +2,7 @@ from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for, flash
 
 from forms import WithdrawalForm, DepositForm, EnterPINForm
-from ATMModels import DataStore, Transaction, WorkOrder, DamageClaim, EnterPIN
+from ATMModels import DataStore, Transaction, EnterPIN
 
 import jsonpickle
 import os.path
@@ -13,7 +13,7 @@ app.debug = True
 app.config['SECRET_KEY'] = 'secret key 11829@#%737aJFa^$sdfiED098SDFAd88@%'
 
 
-ds = DataStore.FactoryDataRestore()
+#ds = DataStore.FactoryDataRestore()
 
 @app.route('/')
 @app.route('/home')

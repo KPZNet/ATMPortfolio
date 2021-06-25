@@ -6,8 +6,10 @@ import jsonpickle
 class Transaction (  ) :
 
     def __init__(self):
-        self.ID = 0
+        self.accountNumber = 5
+        self.ID = 9
         self.amount
+        self.datetime
 
 class EnterPIN (  ) :
 
@@ -17,11 +19,13 @@ class EnterPIN (  ) :
 
 
 
-class DataStore():
+class BankAccount():
 
     def __init__(self) :
-        self.workOrders = {}
-        self.balance
+        self.transactions = {}
+        self.balance = 0
+        self.nextTransactionID = 0
+        self.accountNumber = "999"
 
     def __del__(self) :
         pass
@@ -31,37 +35,26 @@ class DataStore():
         with open ( "BankAccount.json", "w" ) as outfile :
             outfile.write ( jp )
 
+    def AddTransaction(self, transaction):
 
+       self.nextTransactionID = self.nextTransactionID + 1
+       transaction.ID = self.nextTransactionID
+       self.transactions[str(self.nextTransactionID)] = transaction
+       return transaction
 
-    def AddWorkOrder(self, workOrder):
-
-       if str(workOrder.potHoleID) in self.potHoles:
-           ph = self.potHoles[str(workOrder.potHoleID)]
-           workOrder.location = ph.streetAddress
-           workOrder.size  = ph.size
-           self.nextWorkOrderID = self.nextWorkOrderID + 1
-           workOrder.ID = self.nextWorkOrderID
-           self.workOrders[str(self.nextWorkOrderID)] = workOrder
-       return workOrder
-
-    def AddDamageClaim(self, damageClaim):
-       self.nextdamageClaimID = self.nextdamageClaimID + 1
-       damageClaim.ID = self.nextdamageClaimID
-       self.damageClaims[str(self.nextdamageClaimID)] = damageClaim
-       return damageClaim
 
     @staticmethod
     def FactoryDataRestore():
         try :
-            if os.path.isfile ( 'PotHoles.json' ) :
-                with open ( 'PotHoles.json', 'r' ) as openfile :
+            if os.path.isfile ( 'BankAccount.json' ) :
+                with open ( 'BankAccount.json', 'r' ) as openfile :
                     json_object = openfile.read()
                     pt = jsonpickle.decode ( json_object )
                     return pt
             else:
-                return DataStore()
+                return BankAccount()
         except(Exception) as e:
-            return DataStore()
+            return BankAccount()
         finally :
             pass
 
@@ -69,7 +62,7 @@ class DataStore():
     def FactoryDataSave(ds):
         try :
             jp = jsonpickle.encode ( ds )
-            with open ( "PotHoles.json", "w" ) as outfile :
+            with open ( "BankAccount.json", "w" ) as outfile :
                 outfile.write ( jp )
         except(Exception) as e:
             pass
