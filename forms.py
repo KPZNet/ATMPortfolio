@@ -7,6 +7,14 @@ class WithdrawalForm ( FlaskForm ) :
     amount = StringField ( "Amount to Withdraw:", validators=[DataRequired ()] )
     submit = SubmitField ( "Submit" )
 
+class DepositForm ( FlaskForm ) :
+    amount = StringField ( "Amount to Deposit:", validators=[DataRequired ()] )
+    submit = SubmitField ( "Submit" )
+
+class EnterPINForm ( FlaskForm ) :
+    amount = StringField ( "Enter PIN:", validators=[DataRequired ()] )
+    submit = SubmitField ( "Submit" )
+
 class AEWorkOrderForm ( FlaskForm ) :
     potHoleID = IntegerField ( "Pothole ID:", validators=[DataRequired ()] )
     repairCrewID = IntegerField ( "Repair Crew ID:", validators=[DataRequired ()] )

@@ -9,6 +9,12 @@ class Transaction (  ) :
         self.ID = 0
         self.amount
 
+class EnterPIN (  ) :
+
+    def __init__(self):
+        self.ID = 0
+        self.pin
+
 
 class WorkOrder (  ) :
     hourRate = 20.00

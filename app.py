@@ -1,8 +1,8 @@
 from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for
 
-from forms import WithdrawalForm
-from PotHoleModels import DataStore, Transaction, WorkOrder, DamageClaim
+from forms import WithdrawalForm, DepositForm, EnterPINForm
+from ATMModels import DataStore, Transaction, WorkOrder, DamageClaim, EnterPIN
 
 import jsonpickle
 import os.path
@@ -10,7 +10,7 @@ import json
 
 app = Flask ( __name__ )
 app.debug = True
-app.config['SECRET_KEY'] = 'a really really really really long secret key'
+app.config['SECRET_KEY'] = 'secret key 11829@#%737aJFa^$sdfiED098SDFAd88@%'
 
 #ds = DataStore()
 
@@ -49,27 +49,28 @@ def Withdrawal():
 
     return render_template('Withdrawal.html', form=form)
 
-@app.route('/AEWorkOrder/', methods=['get', 'post'])
-def AEWorkOrder():
-    form = AEWorkOrderForm()
+@app.route('/Deposit/', methods=['get', 'post'])
+def Deposit():
+    form = DepositForm()
+    if form.validate_on_submit():
+        f = form
+        ph = Transaction()
+        ph.amount = f.amount.data
+
+        return redirect(url_for('Deposit'))
+
+    return render_template('Deposit.html', form=form)
+
+@app.route('/EnterPIN/', methods=['get', 'post'])
+def EnterPIN():
+    form = EnterPINForm()
     if form.validate_on_submit():
         f = form
         wo = WorkOrder()
-        wo.potHoleID = f.potHoleID.data
-        wo.hoursApplied = f.hoursApplied.data
-        wo.repairCrewID = f.repairCrewID.data
-        wo.equipmentAssigned = f.equipmentAssigned.data
-        wo.fillerMaterial = f.fillerMaterial.data
-        wo.holeStatus = f.holeStatus.data
-        wo.numberOfWorkers = f.numberOfWorkers.data
 
-        wo.CalculateCostEsimate()
-        ds.AddWorkOrder(wo)
-        DataStore.FactoryDataSave ( ds )
+        return redirect(url_for('EnterPIN'))
 
-        return redirect(url_for('AEWorkOrder'))
-
-    return render_template('AEWorkOrder.html', form=form)
+    return render_template('EnterPIN.html', form=form)
 
 @app.route('/AEDamageClaim/', methods=['get', 'post'])
 def AEDamageClaim():
