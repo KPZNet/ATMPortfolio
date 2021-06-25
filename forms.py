@@ -25,12 +25,4 @@ class AEWorkOrderForm ( FlaskForm ) :
     fillerMaterial = IntegerField ( "Filler Material Used:", validators=[DataRequired ()] )
     submit = SubmitField ( "Submit" )
 
-class AEDamageClaimForm ( FlaskForm ) :
-    potHoleID = StringField ( "Pothole ID:", validators=[DataRequired ()] )
-    name = StringField ( "Name:", validators=[DataRequired ()] )
-    address = StringField ( "Address:", validators=[DataRequired ()] )
-    phone = StringField ( "Phone:", validators=[DataRequired ()] )
-    damageType = StringField ( "Damage Description:", validators=[DataRequired ()] )
-    dollarAmount = StringField ( "Claim Amount:", validators=[DataRequired ()] )
-    approved = BooleanField ( "Approval Status:" )
-    submit = SubmitField ( "Submit" )
+
