@@ -16,88 +16,22 @@ class EnterPIN (  ) :
         self.pin
 
 
-class WorkOrder (  ) :
-    hourRate = 20.00
-    fillerMaterialCost = 56.75
-    backHoeCost = 450.00
-    shovelCost = 20.00
-    pickCost = 15.00
-    mixerCost = 150.00
-    standardEquipCost = 100.00
-
-    def __init__(self):
-        self.ID = 0
-        self.potHoleID = 0
-        self.repairCrewID = 0
-        self.numberOfWorkers = 0
-        self.equipmentAssigned = ""
-        self.hoursApplied = 0
-        self.holeStatus = ""
-        self.fillerMaterial = 0
-        self.location = ""
-        self.size = 0
-        self.costEstimate = 0.0
-
-    def CalculateCostEsimate(self):
-        ceh = (self.hourRate * self.hoursApplied * self.numberOfWorkers)
-        cem = (self.fillerMaterialCost*self.fillerMaterial)
-
-        equipCost = self.standardEquipCost
-        if "backhoe" in self.equipmentAssigned:
-            equipCost = equipCost + self.backHoeCost
-        if "mixer" in self.equipmentAssigned:
-            equipCost = equipCost + self.mixerCost
-        if "shovel" in self.equipmentAssigned:
-            equipCost = equipCost + self.shovelCost
-        if "pick" in self.equipmentAssigned:
-            equipCost = equipCost + self.pickCost
-
-        self.costEstimate = equipCost + cem + ceh
-
-class DamageClaim (  ) :
-
-    def __init__(self):
-        self.ID = 0
-        self.potHoleID = 0
-        self.name = ""
-        self.address = ""
-        self.phone = ""
-        self.damageType = ""
-        self.dollarAmount = 0.0
-        self.approved = False
 
 class DataStore():
 
     def __init__(self) :
-        self.potHoles = {}
         self.workOrders = {}
-        self.damageClaims = {}
-        self.nextPotHoleID = 0
-        self.nextWorkOrderID = 0
-        self.nextdamageClaimID = 0
+        self.balance
 
     def __del__(self) :
         pass
 
     def WriteDataStore(self) :
         jp = jsonpickle.encode(self)
-        with open ( "PotHoles.json", "w" ) as outfile :
+        with open ( "BankAccount.json", "w" ) as outfile :
             outfile.write ( jp )
 
-    def GetAllPotHolesReport(self):
-        return self.potHoles
 
-    def GetAllWorkOrdersReport(self):
-        return self.workOrders
-
-    def GetAllDamageClaimReport(self):
-        return self.damageClaims
-
-    def AddPotHole(self, pothole):
-       self.nextPotHoleID = self.nextPotHoleID + 1
-       pothole.ID = self.nextPotHoleID
-       self.potHoles[str(self.nextPotHoleID)] = pothole
-       return pothole
 
     def AddWorkOrder(self, workOrder):
 

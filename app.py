@@ -12,7 +12,6 @@ app = Flask ( __name__ )
 app.debug = True
 app.config['SECRET_KEY'] = 'secret key 11829@#%737aJFa^$sdfiED098SDFAd88@%'
 
-#ds = DataStore()
 
 ds = DataStore.FactoryDataRestore()
 
@@ -67,8 +66,8 @@ def EnterPIN():
     if form.validate_on_submit():
         f = form
 
-        flash('Thank you for registering')
-        return redirect('/EnterPIN')
+
+        return render_template('ErrorPinInvalid.html')
 
         return redirect(url_for('EnterPIN'))
 
