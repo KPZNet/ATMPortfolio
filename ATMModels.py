@@ -25,7 +25,9 @@ class BankAccount():
         self.transactions = {}
         self.balance = 0
         self.nextTransactionID = 0
-        self.accountNumber = "999"
+        self.cardNumber = "999"
+        self.pin = 5566
+        self.currentRetry = 0
 
     def __del__(self) :
         pass

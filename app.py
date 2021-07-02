@@ -2,7 +2,7 @@ from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for, flash
 
 from forms import WithdrawalForm, DepositForm, EnterPINForm
-from ATMModels import DataStore, Transaction, EnterPIN
+from ATMModels import BankAccount, Transaction, EnterPIN
 
 import jsonpickle
 import os.path
@@ -13,7 +13,7 @@ app.debug = True
 app.config['SECRET_KEY'] = 'secret key 11829@#%737aJFa^$sdfiED098SDFAd88@%'
 
 
-#ds = DataStore.FactoryDataRestore()
+bankAccount = BankAccount.FactoryDataRestore()
 
 @app.route('/')
 @app.route('/home')
@@ -66,8 +66,12 @@ def EnterPIN():
     if form.validate_on_submit():
         f = form
 
-
-        return render_template('ErrorPinInvalid.html')
+        if f.pin != bankAccount.pin:
+            bankAccount.currentRetry = bankAccount.currentRetry + 1
+            if bankAccount.currentRetry < 3 :
+                return render_template('ErrorPinInvalid.html')
+            else:
+                return render_template('ErrorPinInvalidLocked.html')
 
         return redirect(url_for('EnterPIN'))
 

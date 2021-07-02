@@ -12,7 +12,7 @@ class DepositForm ( FlaskForm ) :
     submit = SubmitField ( "Submit" )
 
 class EnterPINForm ( FlaskForm ) :
-    amount = StringField ( "Enter PIN:", validators=[DataRequired ()] )
+    pin = StringField ( "Enter PIN:", validators=[DataRequired ()] )
     submit = SubmitField ( "Submit" )
 
 class AEWorkOrderForm ( FlaskForm ) :
