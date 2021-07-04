@@ -41,9 +41,14 @@ def Withdrawal():
     form = WithdrawalForm()
     if form.validate_on_submit():
         f = form
-        ph = Transaction()
-        ph.amount = f.amount.data
-
+        tx = Transaction()
+        tx.amount = float(f.amount.data)
+        tx.amount = float(tx.amount) * float(-1.00)
+        if bankAccount.balance + tx.amount >= 0:
+            bankAccount.AddTransaction(tx)
+            BankAccount.FactoryDataSave(bankAccount)
+        else:
+            return render_template('CloseAccountBalanceZero.html')
         return redirect(url_for('Withdrawal'))
 
     return render_template('Withdrawal.html', form=form)
@@ -53,9 +58,10 @@ def Deposit():
     form = DepositForm()
     if form.validate_on_submit():
         f = form
-        ph = Transaction()
-        ph.amount = f.amount.data
-
+        tx = Transaction()
+        tx.amount = float(f.amount.data)
+        bankAccount.AddTransaction(tx)
+        BankAccount.FactoryDataSave(bankAccount)
         return redirect(url_for('Deposit'))
 
     return render_template('Deposit.html', form=form)
@@ -77,7 +83,11 @@ def EnterPIN():
 
     return render_template('EnterPIN.html', form=form)
 
-
+@app.route('/Transactions/', methods=['get', 'post'])
+def Transactions():
+    transActions = bankAccount.GetAllTransactions()
+    balance = bankAccount.GetBalance()
+    return render_template('Transactions.html', txReport = transActions, bx = balance)
 
 if __name__ == '__main__' :
     app.run ()

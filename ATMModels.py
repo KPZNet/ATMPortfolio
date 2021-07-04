@@ -2,14 +2,15 @@
 import json
 import os.path
 import jsonpickle
+from datetime import datetime
 
 class Transaction (  ) :
 
     def __init__(self):
         self.accountNumber = 5
         self.ID = 9
-        self.amount
-        self.datetime
+        self.amount = 0.0
+        self.datetime = datetime.now()
 
 class EnterPIN (  ) :
 
@@ -23,7 +24,7 @@ class BankAccount():
 
     def __init__(self) :
         self.transactions = {}
-        self.balance = 0
+        self.balance = 1000.00
         self.nextTransactionID = 0
         self.cardNumber = "999"
         self.pin = 5566
@@ -31,6 +32,12 @@ class BankAccount():
 
     def __del__(self) :
         pass
+
+    def GetBalance(self):
+        return self.balance
+
+    def GetAllTransactions(self):
+        return self.transactions
 
     def WriteDataStore(self) :
         jp = jsonpickle.encode(self)
@@ -42,6 +49,7 @@ class BankAccount():
        self.nextTransactionID = self.nextTransactionID + 1
        transaction.ID = self.nextTransactionID
        self.transactions[str(self.nextTransactionID)] = transaction
+       self.balance = self.balance + transaction.amount
        return transaction
 
 
