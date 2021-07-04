@@ -15,14 +15,6 @@ class EnterPINForm ( FlaskForm ) :
     pin = StringField ( "Enter PIN:", validators=[DataRequired ()] )
     submit = SubmitField ( "Submit" )
 
-class AEWorkOrderForm ( FlaskForm ) :
-    potHoleID = IntegerField ( "Pothole ID:", validators=[DataRequired ()] )
-    repairCrewID = IntegerField ( "Repair Crew ID:", validators=[DataRequired ()] )
-    numberOfWorkers = IntegerField ( "Number of Workers:", validators=[DataRequired ()] )
-    equipmentAssigned = TextAreaField ( "Equipment Assigned:", validators=[DataRequired ()] )
-    hoursApplied = IntegerField ( "Hours Applied:", validators=[DataRequired ()] )
-    holeStatus = StringField ( "Hole Status:", validators=[DataRequired ()] )
-    fillerMaterial = IntegerField ( "Filler Material Used:", validators=[DataRequired ()] )
-    submit = SubmitField ( "Submit" )
+
 
 

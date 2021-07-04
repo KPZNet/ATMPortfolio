@@ -13,12 +13,14 @@
     <tr style="background-color: #7cc3a97d">
         <th style="color: white;padding: 1rem">ID</th>
         <th style="color: white;padding: 1rem">Amount</th>
+         <th style="color: white;padding: 1rem">Date</th>
 
     </tr>
     {% for ID in txReport -%}
         <tr style="background-color: aliceblue">
         <td style="padding: 1rem">{{txReport[ID].ID}}</td>
         <td style="padding: 1rem">{{txReport[ID].amount}}</td>
+        <td style="padding: 1rem">{{txReport[ID].datetime}}</td>
     </tr>
 
     {% endfor %}

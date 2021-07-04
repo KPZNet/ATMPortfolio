@@ -87,7 +87,8 @@ def EnterPIN():
 def Transactions():
     transActions = bankAccount.GetAllTransactions()
     balance = bankAccount.GetBalance()
-    return render_template('Transactions.html', txReport = transActions, bx = balance)
+    balancef = "{:.2f}".format(balance)
+    return render_template('Transactions.html', txReport = transActions, bx = balancef)
 
 if __name__ == '__main__' :
     app.run ()
